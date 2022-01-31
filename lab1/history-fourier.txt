@@ -1,0 +1,150 @@
+    1  2022-01-31 10:40:25 tmux
+    2  2022-01-31 10:40:25 tmux at
+    3  2022-01-31 10:40:25 ls
+    4  2022-01-31 10:40:25 exit
+    5  2022-01-31 10:40:25 ls
+    6  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie
+    7  2022-01-31 10:40:25 git push
+    8  2022-01-31 10:40:25 exit
+    9  2022-01-31 10:40:25 ls ok
+   10  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie
+   11  2022-01-31 10:40:25 ls
+   12  2022-01-31 10:40:25 cd student-jnorbie
+   13  2022-01-31 10:40:25 cd student-jnorbie/
+   14  2022-01-31 10:40:25 ls
+   15  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie
+   16  2022-01-31 10:40:25 exit
+   17  2022-01-31 10:40:25 tmux at
+   18  2022-01-31 10:40:25 ls
+   19  2022-01-31 10:40:25 exit
+   20  2022-01-31 10:40:25 tmux at
+   21  2022-01-31 10:40:25 git clone https://github.com/jakenorbie12/Opathia.git
+   22  2022-01-31 10:40:25 ls
+   23  2022-01-31 10:40:25 rm Opathia
+   24  2022-01-31 10:40:25 rm -f Opathia
+   25  2022-01-31 10:40:25 rm -d Opathia
+   26  2022-01-31 10:40:25 rmdir Opathia
+   27  2022-01-31 10:40:25 cd Opathia
+   28  2022-01-31 10:40:25 ls
+   29  2022-01-31 10:40:25 rm README.md
+   30  2022-01-31 10:40:25 cd ..
+   31  2022-01-31 10:40:25 rm Opathia
+   32  2022-01-31 10:40:25 rmdir -r Opathia
+   33  2022-01-31 10:40:25 rmdir -fr Opathia
+   34  2022-01-31 10:40:25 cd Opathia
+   35  2022-01-31 10:40:25 ls -a
+   36  2022-01-31 10:40:25 rm .
+   37  2022-01-31 10:40:25 rm .git
+   38  2022-01-31 10:40:25 rm -r .git
+   39  2022-01-31 10:40:25 y
+   40  2022-01-31 10:40:25 cd ..
+   41  2022-01-31 10:40:25 rm -r Opathia
+   42  2022-01-31 10:40:25 ls
+   43  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie
+   44  2022-01-31 10:40:25 mkdir student-jnorbie
+   45  2022-01-31 10:40:25 cd student-jnorbie
+   46  2022-01-31 10:40:25 git init
+   47  2022-01-31 10:40:25 git remote add -f origin https://gitlab.com/cs351-spring2022/student-jnorbie
+   48  2022-01-31 10:40:25 cd ..
+   49  2022-01-31 10:40:25 ls
+   50  2022-01-31 10:40:25 rm -r student-jnorbie
+   51  2022-01-31 10:40:25 ls
+   52  2022-01-31 10:40:25 clear
+   53  2022-01-31 10:40:25 ls
+   54  2022-01-31 10:40:25 git clone https://github.com/jakenorbie12/important-tag-NLP
+   55  2022-01-31 10:40:25 git clone https://github.com/jakenorbie12/important-tag-NLP.git
+   56  2022-01-31 10:40:25 git clone https://github.com/jakenorbie12/intro-to-ai-projects.git
+   57  2022-01-31 10:40:25 ls
+   58  2022-01-31 10:40:25 rm -r intro-to-ai-projects
+   59  2022-01-31 10:40:25 y
+   60  2022-01-31 10:40:25 clear
+   61  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   62  2022-01-31 10:40:25 exit
+   63  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   64  2022-01-31 10:40:25 git init student-jnorbie
+   65  2022-01-31 10:40:25 cd student-jnorbie
+   66  2022-01-31 10:40:25 git remote add origin https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   67  2022-01-31 10:40:25 git config core.sparseCheckout true
+   68  2022-01-31 10:40:25 git pull origin master
+   69  2022-01-31 10:40:25 git pull origin
+   70  2022-01-31 10:40:25 echo "lab1" >> .git/info/sparse-checkout
+   71  2022-01-31 10:40:25 git pull origin
+   72  2022-01-31 10:40:25 git config core.sparseCheckout false
+   73  2022-01-31 10:40:25 vim git.config
+   74  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   75  2022-01-31 10:40:25 rm -r student-jnorbie
+   76  2022-01-31 10:40:25 y
+   77  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   78  2022-01-31 10:40:25 ls
+   79  2022-01-31 10:40:25 rm -r intro-at-ai-projects
+   80  2022-01-31 10:40:25 rm -r intro-to-ai-projects
+   81  2022-01-31 10:40:25 y
+   82  2022-01-31 10:40:25 ls
+   83  2022-01-31 10:40:25 git config --global pack.windowMemory 256m
+   84  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   85  2022-01-31 10:40:25 git config --global pack.windowMemory 1512m
+   86  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   87  2022-01-31 10:40:25 git config --global pack.windowMemory 256m
+   88  2022-01-31 10:40:25 git config --global pack.threads 1
+   89  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   90  2022-01-31 10:40:25 git config --global pack.window 0
+   91  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   92  2022-01-31 10:40:25 git config --global pack.packSizeLimit 256m
+   93  2022-01-31 10:40:25 git config --global pack.deltaCacheSize 256m
+   94  2022-01-31 10:40:25 git config --global core.packedGitLimit 256m
+   95  2022-01-31 10:40:25 git config --global core.packedGitWindowSize 256m
+   96  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   97  2022-01-31 10:40:25 ls
+   98  2022-01-31 10:40:25 git clone https://gitlab.com/cs351-spring2022/student-jnorbie.git
+   99  2022-01-31 10:40:25 git clone --filter=blob:none --no-checkout https://gitlab.com/cs351-spring2022/student-jnorbie.git
+  100  2022-01-31 10:40:25 git clone --filter=none --no-checkout https://gitlab.com/cs351-spring2022/student-jnorbie.git
+  101  2022-01-31 10:40:25 git clone --no-checkout https://gitlab.com/cs351-spring2022/student-jnorbie.git
+  102  2022-01-31 10:40:25 git clone https://github.com/Jake-Norbie/cs351-temp.git'
+  103  2022-01-31 10:40:25 exit
+  104  2022-01-31 10:40:25 git clone https://github.com/Jake-Norbie/cs351-temp.git'
+  105  2022-01-31 10:40:25 exit
+  106  2022-01-31 10:40:28 cd lab1
+  107  2022-01-31 10:41:10 ls
+  108  2022-01-31 10:41:16 vim README.md
+  109  2022-01-31 10:45:11 ls
+  110  2022-01-31 10:45:13 vim README.md
+  111  2022-01-31 10:45:56 git commit -am "Signing Honor Pledge"
+  112  2022-01-31 10:46:05 git push
+  113  2022-01-31 10:47:45 git config --global push.default simple
+  114  2022-01-31 10:47:47 git push
+  115  2022-01-31 11:02:26 gcc main.c
+  116  2022-01-31 11:02:33 gcc hello.c
+  117  2022-01-31 11:02:48 gcc hello.c main.c
+  118  2022-01-31 11:02:51 ls
+  119  2022-01-31 11:03:02 ./a.out
+  120  2022-01-31 11:03:06 ./a.out Master
+  121* 2022-01-31 11:03:23 
+  122  2022-01-31 11:03:38 ./a.out Gabe
+  123  2022-01-31 11:04:00 rm a.out
+  124  2022-01-31 11:04:18 gcc -o hello hello.c main.c
+  125  2022-01-31 11:04:19 ls
+  126  2022-01-31 11:04:27 ./hello Overlord
+  127  2022-01-31 11:05:31 gcc -c hello.c
+  128  2022-01-31 11:05:35 gcc -c main.c
+  129  2022-01-31 11:05:36 ls
+  130  2022-01-31 11:05:54 gcc -o hello hello.o main.o
+  131  2022-01-31 11:05:57 ls
+  132  2022-01-31 11:06:00 hello O
+  133  2022-01-31 11:06:07 ./hello O
+  134  2022-01-31 11:06:36 rm -f *.o hello
+  135  2022-01-31 11:06:38 ls
+  136  2022-01-31 11:06:51 make
+  137  2022-01-31 11:06:53 ls
+  138  2022-01-31 11:06:58 hello Works
+  139  2022-01-31 11:07:03 ./hello Works
+  140  2022-01-31 11:07:09 make
+  141  2022-01-31 11:07:23 touch hello.c
+  142  2022-01-31 11:07:27 make
+  143  2022-01-31 11:07:38 make test
+  144  2022-01-31 11:09:30 export HISTTIMEFORMAT'%F %T '
+  145  2022-01-31 11:10:00 export HISTTIMEFORMAT='%F %T '
+  146  2022-01-31 11:10:03 ls
+  147  2022-01-31 11:10:42 history > history-fourier.txt
+  148  2022-01-31 11:10:44 ls
+  149  2022-01-31 11:10:56 rm history-fourier.txt
+  150  2022-01-31 11:11:08 history > history-fourier.txt
