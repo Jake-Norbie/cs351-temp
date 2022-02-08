@@ -12,12 +12,19 @@ int main(int argc, char *argv[]) {
   fgets(str, 100, stdin);
   for (int l = 0; l < strlen(str); l++) {
      char *pos;
-     pos = strchr(argv[1],str[l]);
-     if (pos) {
-       printf("%c",argv[2][pos - &argv[1][0]]);
-     }
-     else {
-       printf("%c",str[l]);
+     if (strcmp(argv[1],"-d") == 0) {
+       pos = strchr(argv[2],str[l]);
+       if (!pos) {
+         printf("%c",str[l]);
+       }
+     } else {
+       pos = strchr(argv[1],str[l]);
+       if (pos) {
+         printf("%c",argv[2][pos - &argv[1][0]]);
+       }
+       else {
+         printf("%c",str[l]);
+       }
      }
   }
   printf("%d",&argv[1][1]); 
