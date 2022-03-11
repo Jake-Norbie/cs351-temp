@@ -163,17 +163,26 @@ int main(int argc, char **argv)
  */
 void eval(char *cmdline) 
 {
-  /* the following code demonstrates how to use parseline --- you'll 
-   * want to replace most of it (at least the print statements). */
-  int i, bg;
-  char *argv[MAXARGS];
 
-  bg = parseline(cmdline, argv);
-  if (bg) {
-    printf("background job requested\n");
-  }
-  for (i=0; argv[i] != NULL; i++) {
-    printf("argv[%d]=%s%s", i, argv[i], (argv[i+1]==NULL)?"\n":", ");
+  char *argv[MAXARGS];
+  pid_t pid;
+  struct job_t *job;
+  
+  int bg = parseline(cmdline, argv);
+  if (!builtin_cmd(argv)) {
+    if ((pid = fork()) == 0) {
+      setpgid(0,0);
+      execvp(argv[0],argv);
+      printf("%s: Command Not Found\n", argv[0]);
+      exit(0);
+    }
+    addjob(jobs, pid, bg ? BG : FG, cmdline);
+    if (!bg) {
+      waitfg(pid);  
+    } else {
+      job = getjobpid(jobs, pid);
+      printf("[%d] (%d) %s", job->jid, job->pid, cmdline);
+    }
   }
   return;
 }
@@ -241,7 +250,19 @@ int parseline(const char *cmdline, char **argv)
  */
 int builtin_cmd(char **argv) 
 {
-  return 0;     /* not a builtin command */
+  if (strcmp(argv[0],"quit") == 0) {
+    exit(0);
+  } else if (strcmp(argv[0],"fg") == 0) {
+    do_bgfg(argv);
+    return 1;
+  } else if (strcmp(argv[0],"bg") == 0) {
+    do_bgfg(argv);
+    return 1;
+  } else if (strcmp(argv[0],"jobs") == 0) {
+    listjobs(jobs);
+    return 1;
+  }
+  return 0;
 }
 
 /* 
@@ -249,6 +270,13 @@ int builtin_cmd(char **argv)
  */
 void do_bgfg(char **argv) 
 {
+  struct job_t *job = getjobjid(jobs, argv[1][1]);
+  if (strcmp(argv[0],"bg") == 0) {
+    if (job->state == ST) {
+      job->state = BG;
+      kill(job->pid, SIGCONT);
+    }
+  }
   return;
 }
 
@@ -257,6 +285,10 @@ void do_bgfg(char **argv)
  */
 void waitfg(pid_t pid)
 {
+  struct job_t *job = getjobpid(jobs,pid);
+  while (job->state == FG) {
+    sleep(1);  
+  }
   return;
 }
 
@@ -273,6 +305,11 @@ void waitfg(pid_t pid)
  */
 void sigchld_handler(int sig) 
 {
+  pid_t pid;
+  int status;
+  while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
+    deletejob(jobs, pid);
+  }
   return;
 }
 
@@ -283,6 +320,12 @@ void sigchld_handler(int sig)
  */
 void sigint_handler(int sig) 
 {
+  pid_t pid;
+  struct job_t *job;
+  pid = fgpid(jobs);
+  job = getjobpid(jobs, pid);
+  kill(-pid, SIGINT);
+  printf("Job [%d] (%d) terminated by signal 2\n", job->jid, job->pid); 
   return;
 }
 
@@ -293,6 +336,12 @@ void sigint_handler(int sig)
  */
 void sigtstp_handler(int sig) 
 {
+  pid_t pid = fgpid(jobs);
+  struct job_t *job; 
+  job = getjobpid(jobs, pid);
+  kill(-pid, SIGTSTP);
+  job->state = ST;
+  printf("Job [%d] (%d) stopped by signal 20\n", job->jid, job->pid);
   return;
 }
 
