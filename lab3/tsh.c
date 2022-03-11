@@ -276,7 +276,7 @@ void do_bgfg(char **argv)
     return;
   }
   if (argv[1][0] == '%') {
-    for (int i = 1; argv[1][i] != NULL; i++) {
+    for (int i = 1; argv[1][i]; i++) {
       if (!isdigit(argv[1][i])) {
         printf("%s: argument must be a PID or %cjobid\n", argv[0],'%');
         return;
@@ -287,7 +287,7 @@ void do_bgfg(char **argv)
       return;
     }
   } else {
-    for (int i = 0; argv[1][i] != NULL; i++) {
+    for (int i = 0; argv[1][i]; i++) {
       if (!isdigit(argv[1][i])) {
         printf("%s: argument must be a PID or %cjobid\n", argv[0],'%');
         return;
@@ -302,11 +302,11 @@ void do_bgfg(char **argv)
     if (job->state == ST) {
       printf("[%d] (%d) %s",job->jid,job->pid,job->cmdline);
       job->state = BG;
-      kill(job->pid, SIGCONT);
+      kill(-(job->pid), SIGCONT);
     }
   } else {
     if (job->state == ST) {
-      kill(job->pid, SIGCONT);
+      kill(-(job->pid), SIGCONT);
     }
     job->state = FG;
     waitfg(job->pid);
