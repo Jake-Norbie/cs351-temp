@@ -268,14 +268,48 @@ int builtin_cmd(char **argv)
 /* 
  * do_bgfg - Execute the builtin bg and fg commands
  */
-void do_bgfg(char **argv) 
+void do_bgfg(char **argv)
 {
-  struct job_t *job = getjobjid(jobs, argv[1][1]);
+  struct job_t *job;
+  if (!argv[1]) {
+    printf("%s command requires PID or %cjobid argument\n", argv[0],'%');
+    return;
+  }
+  if (argv[1][0] == '%') {
+    for (int i = 1; argv[1][i] != NULL; i++) {
+      if (!isdigit(argv[1][i])) {
+        printf("%s: argument must be a PID or %cjobid\n", argv[0],'%');
+        return;
+      }
+    }
+    if (!(job = getjobjid(jobs,atoi(argv[1] + sizeof(char))))) {
+      printf("%c%s: No such job\n",'%',argv[1] + sizeof(char));
+      return;
+    }
+  } else {
+    for (int i = 0; argv[1][i] != NULL; i++) {
+      if (!isdigit(argv[1][i])) {
+        printf("%s: argument must be a PID or %cjobid\n", argv[0],'%');
+        return;
+      }
+    }
+    if (!(job = getjobpid(jobs,atoi(argv[1])))) {
+      printf("(%d): No such process\n",atoi(argv[1]));
+      return;
+    }
+  }
   if (strcmp(argv[0],"bg") == 0) {
     if (job->state == ST) {
+      printf("[%d] (%d) %s",job->jid,job->pid,job->cmdline);
       job->state = BG;
       kill(job->pid, SIGCONT);
     }
+  } else {
+    if (job->state == ST) {
+      kill(job->pid, SIGCONT);
+    }
+    job->state = FG;
+    waitfg(job->pid);
   }
   return;
 }
@@ -294,7 +328,7 @@ void waitfg(pid_t pid)
 
 /*****************
  * Signal handlers
- *****************/
+ ****************/
 
 /* 
  * sigchld_handler - The kernel sends a SIGCHLD to the shell whenever
