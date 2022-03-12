@@ -167,16 +167,22 @@ void eval(char *cmdline)
   char *argv[MAXARGS];
   pid_t pid;
   struct job_t *job;
+  sigset_t mask;
+  sigemptyset(&mask);
+  sigaddset(&mask, SIGCHLD);
   
   int bg = parseline(cmdline, argv);
   if (!builtin_cmd(argv)) {
+    sigprocmask(SIG_BLOCK, &mask, NULL);
     if ((pid = fork()) == 0) {
       setpgid(0,0);
+      sigprocmask(SIG_UNBLOCK, &mask, NULL);
       execvp(argv[0],argv);
       printf("%s: Command Not Found\n", argv[0]);
       exit(0);
     }
     addjob(jobs, pid, bg ? BG : FG, cmdline);
+    sigprocmask(SIG_UNBLOCK, &mask, NULL);
     if (!bg) {
       waitfg(pid);  
     } else {
@@ -341,7 +347,17 @@ void sigchld_handler(int sig)
 {
   pid_t pid;
   int status;
-  while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
+  while ((pid = waitpid(-1, &status, WNOHANG || WUNTRACED)) > 0) { 
+    if (!WIFEXITED(status)) {
+      struct job_t *job;
+      job = getjobpid(jobs, pid);
+      if (WIFSTOPPED(status)) {
+        job->state = ST;
+        printf("Job [%d] (%d) stopped by signal 20\n", job->jid, job->pid);
+      } else {
+        printf("Job [%d] (%d) terminated by signal 2\n", job->jid, job->pid);
+      }
+    }
     deletejob(jobs, pid);
   }
   return;
@@ -355,11 +371,11 @@ void sigchld_handler(int sig)
 void sigint_handler(int sig) 
 {
   pid_t pid;
-  struct job_t *job;
+  //struct job_t *job;
   pid = fgpid(jobs);
-  job = getjobpid(jobs, pid);
+  //job = getjobpid(jobs, pid);
+  //printf("Job [%d] (%d) terminated by signal 2\n", job->jid, job->pid); 
   kill(-pid, SIGINT);
-  printf("Job [%d] (%d) terminated by signal 2\n", job->jid, job->pid); 
   return;
 }
 
@@ -373,9 +389,9 @@ void sigtstp_handler(int sig)
   pid_t pid = fgpid(jobs);
   struct job_t *job; 
   job = getjobpid(jobs, pid);
-  kill(-pid, SIGTSTP);
   job->state = ST;
   printf("Job [%d] (%d) stopped by signal 20\n", job->jid, job->pid);
+  kill(-pid, SIGTSTP);
   return;
 }
 
